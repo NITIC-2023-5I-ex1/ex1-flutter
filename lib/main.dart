@@ -67,7 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _open_form() async {
-    var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddForm()));
+    var result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddForm()));
     if (result == null) return;
 
     setState(() {

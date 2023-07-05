@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 class AddForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _AddFormState();
-
 }
 
 class _AddFormState extends State<AddForm> {
@@ -34,43 +33,69 @@ class _AddFormState extends State<AddForm> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(decoration: _createInputDecoration("Title"), onChanged: (String text) {
-                    _title = text;
-                  },
+                  child: TextField(
+                      decoration: _createInputDecoration("Title"),
+                      onChanged: (String text) {
+                        _title = text;
+                      },
                       controller: _titleController),
                 ),
                 SizedBox(
                   width: 100,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 4),
-                    child: TextField(decoration: _createInputDecoration("Priority"), inputFormatters: [FilteringTextInputFormatter.digitsOnly], onChanged: (String text) {
-                      _priority = int.parse(text);
-                    }, controller: _priorityController),
+                    child: TextField(
+                        decoration: _createInputDecoration("Priority"),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onChanged: (String text) {
+                          _priority = int.parse(text);
+                        },
+                        controller: _priorityController),
                   ),
                 ),
               ],
             ),
-            TextField(decoration: _createInputDecoration("Description"), onChanged: (String text) {
-              _desc = text;
-            },
+            TextField(
+                decoration: _createInputDecoration("Description"),
+                onChanged: (String text) {
+                  _desc = text;
+                },
                 maxLines: 5,
-            controller: _descController),
+                controller: _descController),
             Row(
               children: [
-                const Text("DueDate ", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),),
+                const Text(
+                  "DueDate ",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
                 Text("${_dueDate.year}/${_dueDate.month}/${_dueDate.day}"),
-                TextButton(onPressed: () async {
-                  final date = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-                  if (date != null) {
-                    _dueDate = date;
-                  }
-                }, child: const Text("Set date")),
+                TextButton(
+                    onPressed: () async {
+                      final date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100));
+                      if (date != null) {
+                        _dueDate = date;
+                      }
+                    },
+                    child: const Text("Set date")),
               ],
             ),
-            ElevatedButton(style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)), backgroundColor: Theme.of(context).primaryColor, foregroundColor: Theme.of(context).canvasColor),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0)),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Theme.of(context).canvasColor),
                 onPressed: () {
-              Navigator.pop(context, TODO(_title, _desc, _priority, _dueDate));
-            }, child: const Text("Add"))
+                  Navigator.pop(
+                      context, TODO(_title, _desc, _priority, _dueDate));
+                },
+                child: const Text("Add"))
           ],
         ),
       ),
