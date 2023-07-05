@@ -1,8 +1,8 @@
 class TODO{
   String title;
   String description;
-  String priority;
-  String dueDate;
+  int priority;
+  DateTime dueDate;
 
   TODO(this.title,this.description,this.priority,this.dueDate);
 }

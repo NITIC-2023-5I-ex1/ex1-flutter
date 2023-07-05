@@ -1,4 +1,5 @@
 import 'package:ex_1_flutter/add_form.dart';
+import 'package:ex_1_flutter/todo.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,10 +57,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late List<TODO> _todos;
 
-  void _open_form() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AddForm()));
+  @override
+  void initState() {
+    super.initState();
+    _todos = [];
+  }
+
+  void _open_form() async {
+    var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddForm()));
+    if (result == null) return;
+
+    setState(() {
+      _todos.add(result as TODO);
+    });
+    print(_todos);
   }
 
   @override
@@ -98,15 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          children: _todos.map((TODO todo) {
+            return Text(todo.title);
+          }).toList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
